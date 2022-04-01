@@ -1,6 +1,9 @@
 ---
-layout: default
---- 
+layout: post
+title:  "Welcome to Jekyll!"
+date:   2022-04-01 14:13:21 +0800
+categories: jekyll update
+---
 
 > 本教程将教会你如何成为一个NFT创建人并如何构建一个基于React的全栈dApp来连接您的智能合约和MetaMask钱包以及相关Web3工具。
 
@@ -16,4 +19,36 @@ layout: default
 
 
 
+## 连接MetaMask
 
+在src文件中创建一个utils文件夹，并在里面创建一个interact.js文件，这个文件中我们将编写connectWallet函数，之后我们会在Minter.js组件中对其进行调用。
+
+```js
+export const connectWallet = async ()=>{
+    if(window.etherum){
+      try{
+        // 在这里我们调用的是Metamask插件的全局API
+        const addressArray = await window.etherum.request({
+            method:"eth_requestAccouts"
+        });
+        return {
+            address:addressArray[0],
+            status:"MetaMask链接成功"
+        }
+      }catch(e){
+       return {address:"",status:e.message}
+      }
+    }else{
+        return {
+            address:"",
+            status:"请使用Chrome浏览器并安装MetaMask插件"
+        }
+    }
+}
+```
+
+现在我们看下React前端代码：
+
+```js
+
+```
