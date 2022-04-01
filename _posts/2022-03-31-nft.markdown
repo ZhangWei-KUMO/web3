@@ -18,11 +18,67 @@ categories: NFT 智能合约
 
 ## 使用hardhat初始化区块链后端代码
 
-hardhat是一个区块链的开发脚手架，我们可以很快生成一个区块链项目包，我们可以基于hardhat快速编写、部署智能合约。
+hardhat是一个区块链的开发脚手架，我们可以很快生成一个区块链项目包，我们可以基于hardhat快速编写、编译、部署智能合约。
 
 ```bash
 # install hardhat
 npm install --save-dev hardhat
 # create a project
 npx hardhat
+```
+
+## 使用openZepplin库编写智能合约代码
+
+如果我们使用原生的代码编写智能合约也行，但是openZepplin库帮我们封装了很多接口，我们可以用简洁的代码便可完成我们智能合约的编写。
+
+```js
+
+```
+
+## 部署合约
+
+```bash
+## 部署
+npx hardhat run scripts/deploy.js --network ropsten
+# 返回合约地址
+Contract deployed to address: 0x81c587EB0fE773404c42c1d2666b5f557C470eED
+```
+
+我们复制这个地址，去[Ropsten Etherscan](https://ropsten.etherscan.io/)网站查看一下最终结果是怎样的。
+
+> 注意Ropsten Etherscan并非主网的Etherscan
+
+
+## 使用Pinate上传你的NFT资产
+
+Pinate是基于IPFS分布式存储的一个平台，我们通过简单地将图片上传到Pinate之后便可以会得到一个CID的哈希值，通过https://gateway.pinata.cloud/ipfs/+CID，我们便可以通过http通信协议访问该图片资产URL。当然这个图片的URL仅仅是NFT元数据中的一个部分，否则它和普通的JPG文件没有任何区别。我们需要将URL放入元数据中。
+
+```js
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const web3 = createAlchemyWeb3(API_URL);
+
+const contract = require("../artifacts/contracts/MyNFT.sol/MyNFT.json");
+const contractAddress = "0x81c587EB0fE773404c42c1d2666b5f557C470eED";
+const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
+
+async function mintNFT(tokenURI) {
+  const nonce = await web3.eth.getTransactionCount(PUBLIC_KEY, 'latest'); //get latest nonce
+
+  //the transaction
+  const tx = {
+    'from': PUBLIC_KEY,
+    'to': contractAddress,
+    'nonce': nonce,
+    'gas': 500000,
+    'maxPriorityFeePerGas': 2999999987,
+    'data': nftContract.methods.mintNFT(PUBLIC_KEY, tokenURI).encodeABI()
+  };
+
+  const signedTx = await web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
+  const transactionReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+  
+  console.log(`Transaction receipt: ${JSON.stringify(transactionReceipt)}`);
+}
+
+mintNFT("https://gateway.pinata.cloud/ipfs/QmYueiuRNmL4MiA2GwtVMm6ZagknXnSpQnB3z2gWbz36hP");
 ```
