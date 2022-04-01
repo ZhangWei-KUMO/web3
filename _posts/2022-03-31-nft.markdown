@@ -7,3 +7,22 @@ categories: NFT 智能合约
 
 
 在投机市场中NFT的价值已经展现的非常明显，从狭义的技术上来说其实就是基于以太坊的ERC-721标准发行的数字资产。本教程将带大家在以太坊Repsten测试网中通过Metamask、Solidity、Hardhat、Pinata、Alchemy这些工具创建您的第一个NFT数字资产。
+
+## 前期准备工作
+
+第一步：我们需要连接以太坊网络，在传统方式中我们需要去在一个云服务器上运行一个自己的以太坊节点，并通过该点向区块链发出请求，为了方便我们的开发速度，我们使用Alchemy SaaS应用直接部署我们的区块链节点。
+
+第二步：注册并使用MetaMask钱包，这里假设我们的开发人员已经熟练使用钱包。
+
+第三步：去Ropsten Faucet里面取一部分token作为我们后续通信的消耗。
+
+## 使用hardhat初始化区块链后端代码
+
+hardhat是一个区块链的开发脚手架，我们可以很快生成一个区块链项目包，我们可以基于hardhat快速编写、部署智能合约。
+
+```bash
+# install hardhat
+npm install --save-dev hardhat
+# create a project
+npx hardhat
+```
