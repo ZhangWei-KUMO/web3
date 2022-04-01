@@ -3,7 +3,7 @@ nav:
 - name: 首页
   link: /
 - name: 关于我们
-  link: /about.html
+  link: /contact.html
 
 <nav>
   {% for item in site.nav %}
