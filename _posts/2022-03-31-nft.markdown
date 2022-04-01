@@ -6,4 +6,4 @@ categories: NFT 智能合约
 ---
 
 
-智能合约
+在投机市场中NFT的价值已经展现的非常明显，从狭义的技术上来说其实就是基于以太坊的ERC-721标准发行的数字资产。本教程将带大家在以太坊Repsten测试网中通过Metamask、Solidity、Hardhat、Pinata、Alchemy这些工具创建您的第一个NFT数字资产。
