@@ -1,7 +1,5 @@
 ---
-title:  如何创建一个全栈Dapp
-layout: template
-filename: NAME OF THIS .md FILE HERE
+layout: default
 --- 
 
 > 本教程将教会你如何成为一个NFT创建人并如何构建一个基于React的全栈dApp来连接您的智能合约和MetaMask钱包以及相关Web3工具。
