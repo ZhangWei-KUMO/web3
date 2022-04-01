@@ -1,5 +1,5 @@
 ---
 title: 如何创建一个NFT
 layout: template
-filename: nft
+filename: NAME OF THIS .md FILE HERE
 --- 
