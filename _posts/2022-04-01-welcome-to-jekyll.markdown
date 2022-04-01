@@ -1,54 +1,29 @@
 ---
 layout: post
 title:  "Welcome to Jekyll!"
-date:   2022-04-01 14:13:21 +0800
+date:   2022-04-01 14:27:31 +0800
 categories: jekyll update
 ---
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-> 本教程将教会你如何成为一个NFT创建人并如何构建一个基于React的全栈dApp来连接您的智能合约和MetaMask钱包以及相关Web3工具。
+Jekyll requires blog post files to be named according to the following format:
 
-从过完经验来看，对于一个传统的前端工程师来说构建一个前端应用并非难事，但是如何让应用于智能合约进行交互则是一个首要跨过的门槛。在本项目中您将学会：
+`YEAR-MONTH-DAY-title.MARKUP`
 
-1. 如何将您的前端项目与智能合约进行连接；
-2. 如何在前端应用中调用智能合约的方法；
-3. 使用MetaMask钱包对交易进行签名。
+Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
 
-> 本项目将基于React前端框架，所以我们会假定开发者是一个熟悉React前端框架的成熟开发人员。
+Jekyll also offers powerful support for code snippets:
 
-话不多说，我们开始接下来的教程。在了解代码之前，开发人员需要了解NFT的底层是什么。就狭义上的以太坊NFT而言，它底层实际上是基于ERC-721和ERC-1155两个标准的智能合约。这两个标准的区别在于ERC-721一次只能传输单一NFT资产，而ERC-1155则可以进行批量传输。而我们通俗意义上讲的“NFT数字资产”则是通过调用智能合约里的Minting function所生成的实例（instance），该实例运行在区块链上并具有唯一性。
+{% highlight ruby %}
+def print_hi(name)
+  puts "Hi, #{name}"
+end
+print_hi('Tom')
+#=> prints 'Hi, Tom' to STDOUT.
+{% endhighlight %}
 
+Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
-
-## 连接MetaMask
-
-在src文件中创建一个utils文件夹，并在里面创建一个interact.js文件，这个文件中我们将编写connectWallet函数，之后我们会在Minter.js组件中对其进行调用。
-
-```js
-export const connectWallet = async ()=>{
-    if(window.etherum){
-      try{
-        // 在这里我们调用的是Metamask插件的全局API
-        const addressArray = await window.etherum.request({
-            method:"eth_requestAccouts"
-        });
-        return {
-            address:addressArray[0],
-            status:"MetaMask链接成功"
-        }
-      }catch(e){
-       return {address:"",status:e.message}
-      }
-    }else{
-        return {
-            address:"",
-            status:"请使用Chrome浏览器并安装MetaMask插件"
-        }
-    }
-}
-```
-
-现在我们看下React前端代码：
-
-```js
-
-```
+[jekyll-docs]: https://jekyllrb.com/docs/home
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/
